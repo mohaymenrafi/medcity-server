@@ -22,6 +22,7 @@ async function run() {
     const database = client.db('medcity');
     const doctorsCollection = database.collection('doctors');
     const departmentsCollection = database.collection('departments');
+    const serviceDetailsCollection = database.collection('service-details');
 
     // list of doctors
     app.get('/doctors', async (req, res) => {
@@ -31,6 +32,11 @@ async function run() {
     // list of departments
     app.get('/departments', async (req, res) => {
       const result = await departmentsCollection.find({}).toArray();
+      res.send(result);
+    });
+    // single service details
+    app.get('/service-details', async (req, res) => {
+      const result = await serviceDetailsCollection.find({}).toArray();
       res.send(result);
     });
   } finally {
